@@ -15,8 +15,6 @@ This is a web-based application that reads RSS feeds. Complete this incomplete t
 
 
 # Instructions 
-To view the feedreader website, download all the file and open index.html in your broswer.
+To view the feedreader website, download(or clone) this repository to your local machine. Locate to the repository folder and open `index.html` to load the feeds.
 
-Or you can use the github pages below
-(https://mechee55.github.io/feedreader/)
 
