@@ -93,38 +93,44 @@ $(function () {
 
     // if the loadFeed() has at least a single entry
     it('define if entry has more than 0 entry', function () {
-      expect(entry).toBeDefined()
-      expect(feed).toBeDefined()
+      expect($('.feed .entry').length).toBeGreaterThan(0)
     })
   })
 
   // This test ensures when a new feed is loaded by loadFeed()
   // that the contect actually changes.
   describe('New Feed Selection', function () {
+    var firstFeed, secondFeed
 
-    // beforeEach ensures that the new feed is loaded via loadFeed()
+    // Ensures that the new feed is loaded via the loadFeed function
     beforeEach(function (done) {
-      // empty the feed
-      feed = []
-
-      // loads the first feed
-      loadFeed(0, function () {
-        // entryStart searches for the first feed for the URL(jQuery)
-        entriesStart = $('.feed').find(allFeeds.url)
-        done()
-      })
-
-      // loads the second feed
       loadFeed(1, function () {
-        // entriesEnd seaches for the first feed for the URL(jQuery)
-        entriesEnd = $('.feed').find(allFeeds.url)
-        done()
+
+        // Tests if first feed is loaded
+        console.log('First feed loaded!')
+
+        // Loads first entry and checks
+        firstFeed = $('.feed').html()
+
+        loadFeed(2, function () {
+
+          // Tests if second feed is loaded
+          console.log('Second feed loaded!')
+          done()
+        })
       })
     })
 
-    it('content changes', function () {
-      // i expect that the new feed is different from the old feed
-      expect(entriesStart).not.toBe(entriesEnd)
+    afterEach(function () {
+      loadFeed(0)
+    })
+
+    // Tests to see if two entries are not equal
+    it('checks if two feeds are different', function () {
+
+      // Checks second feed
+      secondFeed = $('.feed').html()
+      expect(firstFeed).not.toEqual(secondFeed)
     })
   })
 }())
